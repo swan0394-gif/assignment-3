@@ -13,11 +13,13 @@ export default function Home() {
     watermarkOpacity: 0.2,
     caption: (
       <div className="text-lg md:text-2xl font-light">
-        <span className="italic">The Weeknd’s evolution :</span>{" "}
-        <span className="italic underline decoration-4 underline-offset-8 decoration-indigo-400">
-          A Canadian singer-songwriter, record producer,
+        <span className="italic">
+          {"The Weeknd's evolution:"}
         </span>{" "}
-        and actor.
+        <span className="italic underline decoration-4 underline-offset-8 decoration-indigo-400">
+          {"A Canadian singer-songwriter, record producer,"}
+        </span>{" "}
+        {"and actor."}
       </div>
     ),
   };
@@ -25,7 +27,7 @@ export default function Home() {
   const textProps = {
     title: (
       <>
-        THE <span className="italic">(R&B)</span> KING
+        THE <span className="italic">(R&amp;B)</span> KING
       </>
     ),
     paragraphs: [
@@ -37,15 +39,15 @@ export default function Home() {
           {" "}
           House of Balloons, Thursday, and Echoes of Silence
         </span>{" "}
-        in 2011, and gained recognition for his alternative R&B sound, as well
-        as the mystery surrounding his identity.
+        in 2011, and gained recognition for his alternative R&amp;B sound, as
+        well as the mystery surrounding his identity.
         <span className="font-semibold"> 2012,</span> He signed with Republic
         Records to reissue the mixtapes into the compilation album Trilogy.
       </>,
       <>
         THE WEEKND began combining his signature{" "}
         <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          alternative R&B sound with a more pop-oriented approach
+          alternative R&amp;B sound with a more pop-oriented approach
         </span>{" "}
         on his second
       </>,
@@ -53,15 +55,17 @@ export default function Home() {
         After a string of collaborations and film soundtrack contributions from
         2013 and 2014, he began combining his{" "}
         <span className="italic text-indigo-400 underline decoration-4 underline-offset-4">
-          signature alternative R&B sound with a more pop-oriented
+          signature alternative R&amp;B sound with a more pop-oriented
         </span>{" "}
         approach on his second and third studio albums,{" "}
         <span className="italic">
           Beauty Behind the Madness (2015) and Starboy (2016)
         </span>
-        ; both debuted atop the US Billboard 200 while spawning the Billboard
-        Hot 100 number-one singles "Can't Feel My Face", "The Hills", "Starboy",
-        and "Die for You".
+        {"; both debuted atop the US Billboard 200 while spawning the Billboard "}
+        {"Hot 100 number-one singles "}
+        {
+          "\"Can't Feel My Face\", \"The Hills\", \"Starboy\", and \"Die for You\"."
+        }
       </>,
     ],
   };
@@ -76,7 +80,7 @@ export default function Home() {
     buttons: [
       {
         label: "Alternative R&B",
-        href: "https://en.wikipedia.org/wiki/Alternative_R%26Bhttps://en.wikipedia.org/wiki/Alternative_R%26B",
+        href: "https://en.wikipedia.org/wiki/Alternative_R%26B",
       },
       { label: "( pop-oriented )", href: "https://en.wikipedia.org/wiki/Pop_music" },
     ],
@@ -86,12 +90,12 @@ export default function Home() {
   const text2Props = {
     heading: (
       <>
-        After 2018, he retured to <br />
+        {"After 2018, he returned to"} <br />
         <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          a more alternative R&B-dominated soundscape
+          {"a more alternative R&B-dominated soundscape"}
         </span>
         <br />
-        for his debut extended plays.
+        {"for his debut extended plays."}
       </>
     ),
     buttons: [
@@ -106,36 +110,38 @@ export default function Home() {
     ],
     paragraphs: [
       <>
-        He returned to a more alternative R&B-dominated soundscape for his debut
-        extended play, <span className="italic">My Dear Melancholy (2018)</span>
-        , which included the US top-ten single "Call Out My Name". He started
-        making an album trilogy named after three chronologic time points and{" "}
+        {"He returned to a more alternative R&B-dominated soundscape for his debut "}
+        {"extended play, "}
+        <span className="italic">My Dear Melancholy (2018)</span>
+        {", which included the US top-ten single "}
+        {"\"Call Out My Name\". He started making an album trilogy named after three chronologic time points and "}
         <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          and explored the dream pop and new wave genres
+          {"and explored the dream pop and new wave genres"}
         </span>{" "}
-        with the trilogy's first installment and fourth studio album
+        {"with the trilogy's first installment and fourth studio album"}
       </>,
       <>
-        <span className="italic">After Hours (2020)</span>, which spawned the
-        chart-topping singles "Heartless" and "Save Your Tears", as well as
-        "Blinding Lights", which became{" "}
+        <span className="italic">After Hours (2020)</span>
+        {", which spawned the chart-topping singles "}
+        {"\"Heartless\" and \"Save Your Tears\", as well as \"Blinding Lights\", which became "}
         <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          the best-performing song
+          {"the best-performing song"}
         </span>{" "}
-        in the Billboard Hot 100's history{" "}
+        {"in the Billboard Hot 100's history "}
         <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          and the longest-charting song
+          {"and the longest-charting song"}
         </span>
-        at the time.
+        {" at the time."}
       </>,
       <>
-        The Weeknd began{" "}
+        {"The Weeknd began "}
         <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          exploring dance-pop
+          {"exploring dance-pop"}
         </span>
-        , leading to the second installment and fifth album,{" "}
-        <span className="italic">Dawn FM (2022)</span>, which included the US
-        top-ten single, "Take My Breath".
+        {", leading to the second installment and fifth album, "}
+        <span className="italic">Dawn FM (2022)</span>
+        {", which included the US top-ten single, "}
+        {"\"Take My Breath\"."}
       </>,
     ],
   };
@@ -150,12 +156,12 @@ export default function Home() {
       "It's making him one of the world's best-selling artists. He has earned seven diamond-certifications from the Recording Industry Association of America (RIAA) for his singles",
     buttons: [
       {
-        label: ">LISTEN THE SONG",
+        label: ">LISTEN TO THE SONG",
         href: "https://youtu.be/rhTl_OyehF8?si=sdBlCZ7eGOGCqJuw",
       },
       { label: "( about RIAA )", href: "https://www.riaa.com/gold-platinum/" },
       {
-        label: "( HAVE YOU LISTEN THE SONG YET? )",
+        label: "( HAVE YOU LISTENED TO THE SONG YET? )",
         href: "https://www.youtube.com/watch?v=rhTl_OyehF8",
       },
     ],
@@ -176,7 +182,7 @@ export default function Home() {
         <span className="underline decoration-4 underline-offset-4 decoration-indigo-400">
           A NEW ERA
         </span>{" "}
-        OF HIS SONGS.
+        {"OF HIS SONGS."}
       </>
     ),
     button: {
