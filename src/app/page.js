@@ -1,214 +1,310 @@
+// src/app/page.js
 "use client";
 
-import Header from "./components/Header";
-import Text from "./Text";
-import Card from "./Card";
-import Text2 from "./Text2";
-import FinalCTA from "./FinalCTA";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import MenuDropdown from "./menu/page";
 
-export default function Home() {
-  const headerProps = {
-    background: "/images/weekend-blueback.jpg",
-    watermarkText: "The WEEKND",
-    watermarkOpacity: 0.2,
-    caption: (
-      <div className="text-lg md:text-2xl font-light">
-        <span className="italic">
-          {"The Weeknd's evolution:"}
-        </span>{" "}
-        <span className="italic underline decoration-4 underline-offset-8 decoration-indigo-400">
-          {"A Canadian singer-songwriter, record producer,"}
-        </span>{" "}
-        {"and actor."}
-      </div>
-    ),
-  };
+const API_URL =
+  "https://streaming-availability.p.rapidapi.com/shows/search/title";
+const API_KEY = "e2cc210ab0mshbb043f09697405ep1a2fa2jsn17073dce9cb5";
 
-  const textProps = {
-    title: (
-      <>
-        THE <span className="italic">(R&amp;B)</span> KING
-      </>
-    ),
-    paragraphs: [
-      <>
-        <span className="font-bold">The Weeknd</span> began releasing music
-        anonymously in 2009. After co-founding the record label
-        <span className="italic"> XO,</span> he released three mixtapes—
-        <span className="italic">
-          {" "}
-          House of Balloons, Thursday, and Echoes of Silence
-        </span>{" "}
-        in 2011, and gained recognition for his alternative R&amp;B sound, as
-        well as the mystery surrounding his identity.
-        <span className="font-semibold"> 2012,</span> He signed with Republic
-        Records to reissue the mixtapes into the compilation album Trilogy.
-      </>,
-      <>
-        THE WEEKND began combining his signature{" "}
-        <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          alternative R&amp;B sound with a more pop-oriented approach
-        </span>{" "}
-        on his second
-      </>,
-      <>
-        After a string of collaborations and film soundtrack contributions from
-        2013 and 2014, he began combining his{" "}
-        <span className="italic text-indigo-400 underline decoration-4 underline-offset-4">
-          signature alternative R&amp;B sound with a more pop-oriented
-        </span>{" "}
-        approach on his second and third studio albums,{" "}
-        <span className="italic">
-          Beauty Behind the Madness (2015) and Starboy (2016)
-        </span>
-        {"; both debuted atop the US Billboard 200 while spawning the Billboard "}
-        {"Hot 100 number-one singles "}
-        {
-          "\"Can't Feel My Face\", \"The Hills\", \"Starboy\", and \"Die for You\"."
-        }
-      </>,
-    ],
-  };
+const FOOD_OPTIONS = [
+  { id: "pizza", label: "Pizza", emoji: "🍕", query: "pizza" },
+  { id: "burger", label: "Burger", emoji: "🍔", query: "burger" },
+  { id: "sushi", label: "Sushi", emoji: "🍣", query: "sushi" },
+  { id: "fried", label: "Fried Chicken", emoji: "🍗", query: "fried chicken" },
+  { id: "noodles", label: "Noodles", emoji: "🍜", query: "noodles" },
+  { id: "dessert", label: "Dessert", emoji: "🧁", query: "dessert" },
+];
 
-  const cardSingleProps = {
-    variant: "single",
-    background: "/images/weeknd-hall.jpg",
-    chapter: ". R&B KING .",
-    titleLead: "He",
-    titleBold: "began",
-    titleTail: "combining...",
-    buttons: [
-      {
-        label: "Alternative R&B",
-        href: "https://en.wikipedia.org/wiki/Alternative_R%26B",
-      },
-      { label: "( pop-oriented )", href: "https://en.wikipedia.org/wiki/Pop_music" },
-    ],
-    overlay: 0.4,
-  };
-
-  const text2Props = {
-    heading: (
-      <>
-        {"After 2018, he returned to"} <br />
-        <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          {"a more alternative R&B-dominated soundscape"}
-        </span>
-        <br />
-        {"for his debut extended plays."}
-      </>
-    ),
-    buttons: [
-      {
-        label: ">Album: My Dear Melancholy",
-        href: "https://en.wikipedia.org/wiki/My_Dear_Melancholy",
-      },
-      {
-        label: ">Song: Call Out My Name",
-        href: "https://youtu.be/M4ZoCHID9GI?si=8iVc01L1mYgPqNSg#press",
-      },
-    ],
-    paragraphs: [
-      <>
-        {"He returned to a more alternative R&B-dominated soundscape for his debut "}
-        {"extended play, "}
-        <span className="italic">My Dear Melancholy (2018)</span>
-        {", which included the US top-ten single "}
-        {"\"Call Out My Name\". He started making an album trilogy named after three chronologic time points and "}
-        <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          {"and explored the dream pop and new wave genres"}
-        </span>{" "}
-        {"with the trilogy's first installment and fourth studio album"}
-      </>,
-      <>
-        <span className="italic">After Hours (2020)</span>
-        {", which spawned the chart-topping singles "}
-        {"\"Heartless\" and \"Save Your Tears\", as well as \"Blinding Lights\", which became "}
-        <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          {"the best-performing song"}
-        </span>{" "}
-        {"in the Billboard Hot 100's history "}
-        <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          {"and the longest-charting song"}
-        </span>
-        {" at the time."}
-      </>,
-      <>
-        {"The Weeknd began "}
-        <span className="text-indigo-400 underline decoration-4 underline-offset-4">
-          {"exploring dance-pop"}
-        </span>
-        {", leading to the second installment and fifth album, "}
-        <span className="italic">Dawn FM (2022)</span>
-        {", which included the US top-ten single, "}
-        {"\"Take My Breath\"."}
-      </>,
-    ],
-  };
-
-  const cardTwoProps = {
-    variant: "twoColumn",
-    background: "/images/takemybreath.jpg",
-    chapter: ". Take My Breath .",
-    titleLead: "The Weeknd has sold",
-    titleBold: "over 75 million records",
-    subtitle:
-      "It's making him one of the world's best-selling artists. He has earned seven diamond-certifications from the Recording Industry Association of America (RIAA) for his singles",
-    buttons: [
-      {
-        label: ">LISTEN TO THE SONG",
-        href: "https://youtu.be/rhTl_OyehF8?si=sdBlCZ7eGOGCqJuw",
-      },
-      { label: "( about RIAA )", href: "https://www.riaa.com/gold-platinum/" },
-      {
-        label: "( HAVE YOU LISTENED TO THE SONG YET? )",
-        href: "https://www.youtube.com/watch?v=rhTl_OyehF8",
-      },
-    ],
-    overlay: 0.35,
-  };
-
-  const finalCTAProps = {
-    title: (
-      <>
-        THE{" "}
-        <span className="underline decoration-4 underline-offset-8 decoration-indigo-400">
-          WEEKND
-        </span>
-      </>
-    ),
-    subtitle: (
-      <>
-        <span className="underline decoration-4 underline-offset-4 decoration-indigo-400">
-          A NEW ERA
-        </span>{" "}
-        {"OF HIS SONGS."}
-      </>
-    ),
-    button: {
-      label: "FIND OUT MORE",
-      href: "https://aus.xo.store/?utm_campaign=products&utm_medium=referral&utm_source=xo.store",
-    },
-    footerLinks: [
-      { label: "© 2025" },
-      { label: "contact", href: "mailto:mso540269@gmail.com" },
-      {
-        label: "THE WEEKND website",
-        href: "https://aus.xo.store/?utm_campaign=products&utm_medium=referral&utm_source=xo.storem",
-      },
-      { label: "facebook", href: "https://www.facebook.com/theweeknd/" },
-      { label: "instagram", href: "https://www.instagram.com/theweeknd/" },
-    ],
-  };
+function MovieCard({ movie }) {
+  const poster =
+    movie?.imageSet?.horizontalPoster?.w720 ||
+    movie?.imageSet?.horizontalPoster?.w480 ||
+    movie?.imageSet?.verticalPoster?.w360 ||
+    "";
 
   return (
-    <div>
-      <Header {...headerProps} />
-      <Text {...textProps} />
-      <Card {...cardSingleProps} />
-      <Text2 {...text2Props} />
-      <Card {...cardTwoProps} />
-      <FinalCTA {...finalCTAProps} />
+    <article
+      className="group rounded-3xl bg-[#fff7ef]/95 overflow-hidden shadow-md flex flex-col h-[280px] transition hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.12)]"
+    >
+      <div className="h-40 bg-amber-50 overflow-hidden">
+        {poster ? (
+          <img
+            src={poster}
+            alt={movie.title || "movie"}
+            className="w-full h-full object-cover transition duration-300 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-amber-200 text-sm">
+            no poster
+          </div>
+        )}
+      </div>
+      <div className="p-4 flex-1 flex flex-col gap-2">
+        <h3 className="text-base font-semibold text-[#381c0f] line-clamp-2">
+          {movie.title || movie.originalTitle || "Untitled movie / show"}
+        </h3>
+        <p className="text-xs text-[#381c0f]/60 line-clamp-2">
+          {movie.overview || "No description."}
+        </p>
+        <div className="mt-auto text-[11px] text-[#381c0f]/40 flex gap-4">
+          {movie.releaseYear && <span>{movie.releaseYear}</span>}
+          {movie.runtime && <span>{movie.runtime} min</span>}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function getFoodBg(foodId) {
+  switch (foodId) {
+    case "pizza":
+      return "bg-[#d4621f]";
+    case "burger":
+      return "bg-[#c24b2a]";
+    case "sushi":
+      return "bg-[#d14863]";
+    case "fried":
+      return "bg-[#c96722]";
+    case "noodles":
+      return "bg-[#b24f3b]";
+    case "dessert":
+      return "bg-[#d15590]";
+    default:
+      return "bg-[#d4621f]";
+  }
+}
+
+function renderEmojiOverlay(activeFood) {
+  if (!activeFood) return null;
+
+  const emojiMap = {
+    pizza: "🍕",
+    burger: "🍔",
+    sushi: "🍣",
+    fried: "🍗",
+    noodles: "🍜",
+    dessert: "🧁",
+  };
+
+  const e = emojiMap[activeFood] || "🍕";
+
+  return (
+    <div className="pointer-events-none absolute inset-0 opacity-[0.5] select-none">
+      <div className="absolute top-20 left-8 text-5xl rotate-8">{e}</div>
+      <div className="absolute top-2/3 left-8 text-5xl rotate-8">{e}</div>
+      <div className="absolute top-1/3 right-16 text-5xl">{e}</div>
+      <div className="absolute bottom-10 right-6 text-5xl rotate-6">{e}</div>
     </div>
+  );
+}
+
+export default function FoodMoviePage() {
+  const router = useRouter();
+  const [searchText, setSearchText] = useState("");
+  const [activeFood, setActiveFood] = useState("");
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [activeTab, setActiveTab] = useState("tonight");
+
+function sortMovies(list = []) {
+  const withDesc = [];
+  const noDesc = [];
+
+  list.forEach((item) => {
+    const hasDesc = item?.overview && item.overview.trim() !== "";
+    if (hasDesc) withDesc.push(item);
+    else noDesc.push(item);
+  });
+
+  return [...withDesc, ...noDesc];
+}
+  async function fetchMovies(term) {
+    if (!term) return;
+    setLoading(true);
+    setErrorMsg("");
+    setMovies([]);
+
+    try {
+      const url = `${API_URL}?country=AU&title=${encodeURIComponent(
+        term
+      )}&series_granularity=show&show_type=movie&output_language=en`;
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key": API_KEY,
+          "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
+        },
+      });
+
+      if (!res.ok) throw new Error("API response failed");
+      const data = await res.json();
+      const arr = Array.isArray(data) ? data : data?.result || [];
+      setMovies(sortMovies(arr));
+    } catch (err) {
+      setErrorMsg(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleFoodClick(food) {
+    setActiveFood(food.id);
+    setSearchText(food.label);
+    fetchMovies(food.query);
+  }
+
+  function handleSearch() {
+    setActiveFood("");
+    fetchMovies(searchText);
+  }
+
+  function handleReset() {
+    setSearchText("");
+    setActiveFood("");
+    setMovies([]);
+    setErrorMsg("");
+    setActiveTab("tonight");
+  }
+
+  // menu
+  function handleMenuSelect(key) {
+    setActiveTab(key);
+    if (key === "tonight") return;
+    if (key === "random") {
+      const rnd =
+        FOOD_OPTIONS[Math.floor(Math.random() * FOOD_OPTIONS.length)];
+      handleFoodClick(rnd);
+      return;
+    }
+    if (key === "mood") {
+      router.push("/mood");
+      return;
+    }
+  }
+
+  const activeFoodObj = FOOD_OPTIONS.find((f) => f.id === activeFood);
+  const becauseLabel = activeFoodObj
+    ? activeFoodObj.label
+    : searchText.trim() || "";
+  const becauseEmoji = activeFoodObj ? activeFoodObj.emoji : null;
+
+  return (
+    <main className={`relative min-h-screen ${getFoodBg(activeFood)}`}>
+      {renderEmojiOverlay(activeFood)}
+
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-10 pb-16">
+        {/* top bar */}
+        <header className="flex items-center justify-between mb-10">
+          <button
+            onClick={handleReset}
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-black/10 hover:bg-black/20 text-2xl shadow-sm transition"
+            title="Back to start"
+          >
+            🎬
+          </button>
+
+          <MenuDropdown active={activeTab} onSelect={handleMenuSelect} />
+        </header>
+
+        {/* hero */}
+        <section className="pb-8">
+          <h1 className="text-[clamp(2.5rem,5vw,3.85rem)] font-bold leading-tight tracking-tight text-white">
+            What to Watch Tonight?
+          </h1>
+          <p className="mt-3 text-base md:text-lg text-white/80 max-w-2xl">
+            Pick what you’re eating tonight, we’ll suggest movies to match it.
+          </p>
+
+          {/* search */}
+          <div className="mt-8 flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <input
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                className="w-full rounded-full bg-[#fff7ef] px-6 py-3 text-sm text-gray-400 outline-none border border-transparent focus:border-amber-300"
+                placeholder="Type your dish… e.g. pizza, sushi, fried chicken"
+              />
+            </div>
+            <button
+              onClick={handleSearch}
+              className="rounded-full bg-gradient-to-r from-[#ffb347] via-[#ff8c42] to-[#ff5e3a] px-8 py-3 text-sm font-semibold text-black shadow-sm hover:scale-[1.02] transition"
+            >
+              Search
+            </button>
+          </div>
+
+          {/* icons */}
+          <div className="mt-8 flex flex-wrap gap-5 md:gap-6">
+            {FOOD_OPTIONS.map((food) => (
+              <button
+                key={food.id}
+                onClick={() => handleFoodClick(food)}
+                className={`group relative flex flex-col items-center justify-center w-[115px] h-[115px] md:w-[130px] md:h-[130px] rounded-full transition-all duration-200 ${
+                  activeFood === food.id
+                    ? "bg-white shadow-[0_12px_40px_rgba(255,255,255,0.35)] scale-[1.03]"
+                    : "bg-white/70 hover:bg-white/90 hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]"
+                }`}
+              >
+                <div className="text-3xl md:text-4xl group-hover:scale-110 transition">
+                  {food.emoji}
+                </div>
+                <div className="mt-2 text-sm font-medium text-[#402010]">
+                  {food.label}
+                </div>
+                {activeFood === food.id && (
+                  <span className="pointer-events-none absolute inset-0 rounded-full bg-white/60 blur-2xl opacity-90" />
+                )}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {becauseLabel && (
+          <div className="mt-4 flex items-center gap-3">
+            {becauseEmoji && (
+              <span className="text-2xl drop-shadow-sm">{becauseEmoji}</span>
+            )}
+            <div>
+              <p className="text-white/80 text-xs uppercase tracking-[0.25em]">
+                Because you’re eating {becauseLabel}
+              </p>
+              <p className="text-white/50 text-xs">
+                {movies.length > 0
+                  ? `We found ${movies.length} movies to match this.`
+                  : "Try a search or pick another dish."}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* result */}
+        <section>
+          {loading && (
+            <p className="text-white/80 mt-4">Fetching movies for you…</p>
+          )}
+          {errorMsg && <p className="text-red-100 mt-4">{errorMsg}</p>}
+
+          {!loading && !errorMsg && movies.length === 0 && !becauseLabel && (
+            <p className="mt-6 text-white/50 text-sm">
+              Pick a food icon or type a dish to see movie suggestions.
+            </p>
+          )}
+
+          {!loading && !errorMsg && movies.length > 0 && (
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {movies.map((m) => (
+                <MovieCard key={m.id || m.imdbId} movie={m} />
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
   );
 }

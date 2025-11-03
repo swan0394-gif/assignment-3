@@ -1,8 +1,6 @@
+// src/app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-import Nav from "./Nav"; 
-import Footer from "./Footer"; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,28 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "The WEEKND",
-  description: "Assignment 2 — Next.js + Tailwind",
+  title: "Food Movie night:)",
+  description: "Assignment 3 — Next.js + Tailwind",
 };
 
 export default function RootLayout({ children }) {
- 
-  const footerLinks = [
-    { label: "© 2025" },
-    { label: "contact", href: "mailto:mso540269@gmail.com" },
-    { label: "THE WEEKND website", href: "https://aus.xo.store/" },
-    { label: "facebook", href: "https://www.facebook.com/theweeknd/" },
-    { label: "instagram", href: "https://www.instagram.com/theweeknd/" },
-  ];
-
   return (
     <html lang="en" className="bg-black">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Nav /> 
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+
         <main>{children}</main>
-        <Footer footerLinks={footerLinks} />
+
       </body>
     </html>
   );
